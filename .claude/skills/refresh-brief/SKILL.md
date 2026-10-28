@@ -58,7 +58,7 @@ record an empty list and note it in the changelog.
 For each ticker, look for scheduled events inside the next fourteen days: earnings
 dates, investor days, product launches, ex-dividend dates, court or regulatory dates. Also
 include one market-wide item if it falls in the window and matters to the list (an FOMC
-decision, a CPI release). Search `COMPANY NAME earnings date` and `COMPANY NAME investor
+decision, a CPI release); these go in `BRIEF.market`, not under a ticker. Search `COMPANY NAME earnings date` and `COMPANY NAME investor
 relations events`, and confirm the date on the company IR page or a reputable calendar
 before recording it. Each item needs `date`, `event`, `source`, `url`. If a date is
 "expected" rather than confirmed, say so in the `event` text.

@@ -92,6 +92,10 @@ section { margin-bottom: 2rem; }
 .cal .d { font-weight: 600; }
 .cal .t { font-weight: 700; color: var(--navy); }
 .cal .src { color: var(--muted); font-size: .85rem; }
+.cal .t.mkt { color: var(--muted); }
+
+/* Tap targets: every link is at least 44px tall */
+.tape .sym a, .items .h a, .items a.src, .cal .src a, #repo a { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Changelog */
 .log { list-style: none; margin: 0; padding: 0; }
@@ -117,6 +121,7 @@ footer p { margin: .2rem 0; }
   .banner { border-left-color: #000; background: #fff; color: #000; }
   .wrap { max-width: none; padding: 0; }
   a { color: #000; text-decoration: none; }
+  .tape .sym a, .items .h a, .items a.src, .cal .src a, #repo a { display: inline; min-height: 0; }
   .items .h a::after { content: " (" attr(href) ")"; font-size: 8.5pt; color: #444; }
   .co { break-inside: avoid; }
   #changelog, .no-print { display: none; }
@@ -185,94 +190,213 @@ const WATCHLIST = {
 };
 
 const BRIEF = {
-  mode: "sample",
-  asOf: "2026-10-16",
-  retrievedAt: "2026-10-16T16:30:00-04:00",
-  priceType: "close",
+  mode: "live",
+  asOf: "2026-10-28",
+  retrievedAt: "2026-10-28T10:35:00-04:00",
+  priceType: "intraday",
   companies: {
-    NVDA: {
+    BEAM: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 101.40 },
-        { date: "2026-10-14", close: 99.80 },
-        { date: "2026-10-15", close: 103.10 },
-        { date: "2026-10-16", close: 104.20 }
+        { date: "2026-10-21", close: 24.84 },
+        { date: "2026-10-22", close: 24.56 },
+        { date: "2026-10-23", close: 24.05 },
+        { date: "2026-10-26", close: 23.79 },
+        { date: "2026-10-27", close: 24.90 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:34 AM", price: 26.32 },
+      priceSource: "https://stockanalysis.com/stocks/beam/history/",
       news: [
-        { date: "2026-10-15", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample. The agent writes one plain sentence here on why the item matters to the stock." }
+        { date: "2026-10-27", headline: "Beam Therapeutics reports initial data from BEAM-301 trial", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/beam-therapeutics-reports-initial-data-from-beam-301-trial-thefly-news", why: "First clinical data for BEAM-301 in glycogen storage disease type Ia showed dose-dependent gains in fasting tolerance in six patients, and a higher 60 mg dose cohort is next." },
+        { date: "2026-10-27", headline: "H.C. Wainwright says Beam Therapeutics data strengthens confidence", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/h-c-wainwright-says-beam-therapeutics-data-strengthens-confidence-thefly-news", why: "An analyst kept a Buy rating and $80 target after the BEAM-301 data, a sign of how the Street read the readout." }
       ],
       upcoming: [
-        { date: "2026-10-28", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
+        { date: "2026-11-10", event: "Q3 earnings (expected; estimated date, not confirmed by the company)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/beam/" }
       ]
     },
-    JPM: {
+    PRME: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 99.30 },
-        { date: "2026-10-14", close: 98.90 },
-        { date: "2026-10-15", close: 98.20 },
-        { date: "2026-10-16", close: 97.60 }
+        { date: "2026-10-21", close: 3.81 },
+        { date: "2026-10-22", close: 3.73 },
+        { date: "2026-10-23", close: 3.67 },
+        { date: "2026-10-26", close: 3.61 },
+        { date: "2026-10-27", close: 4.35 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
-      news: [
-        { date: "2026-10-14", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
-      ],
-      upcoming: []
-    },
-    ACN: {
-      closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 100.20 },
-        { date: "2026-10-14", close: 99.90 },
-        { date: "2026-10-15", close: 100.10 },
-        { date: "2026-10-16", close: 100.05 }
-      ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:34 AM", price: 4.90 },
+      priceSource: "https://stockanalysis.com/stocks/prme/history/",
       news: [],
       upcoming: [
-        { date: "2026-10-22", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
+        { date: "2026-11-10", event: "Q3 earnings (expected; estimated date, not confirmed by the company)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/prme/" }
       ]
     },
-    DE: {
+    CRSP: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 102.50 },
-        { date: "2026-10-14", close: 101.80 },
-        { date: "2026-10-15", close: 103.90 },
-        { date: "2026-10-16", close: 102.70 }
+        { date: "2026-10-21", close: 50.50 },
+        { date: "2026-10-22", close: 49.99 },
+        { date: "2026-10-23", close: 49.39 },
+        { date: "2026-10-26", close: 49.01 },
+        { date: "2026-10-27", close: 51.47 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:33 AM", price: 52.00 },
+      priceSource: "https://stockanalysis.com/stocks/crsp/history/",
+      news: [],
+      upcoming: [
+        { date: "2026-11-09", event: "Q3 earnings (expected; estimated date, not confirmed by the company)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/crsp/" }
+      ]
+    },
+    NTLA: {
+      closes: [
+        { date: "2026-10-21", close: 11.65 },
+        { date: "2026-10-22", close: 11.16 },
+        { date: "2026-10-23", close: 11.21 },
+        { date: "2026-10-26", close: 11.26 },
+        { date: "2026-10-27", close: 12.28 }
+      ],
+      latest: { date: "2026-10-28", time: "10:34 AM", price: 12.69 },
+      priceSource: "https://stockanalysis.com/stocks/ntla/history/",
+      news: [],
+      upcoming: [
+        { date: "2026-11-09", event: "Q3 earnings (expected; estimated date, not confirmed by the company)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/ntla/" }
+      ]
+    },
+    EDIT: {
+      closes: [
+        { date: "2026-10-21", close: 2.51 },
+        { date: "2026-10-22", close: 2.49 },
+        { date: "2026-10-23", close: 2.40 },
+        { date: "2026-10-26", close: 2.40 },
+        { date: "2026-10-27", close: 2.60 }
+      ],
+      latest: { date: "2026-10-28", time: "10:33 AM", price: 2.66 },
+      priceSource: "https://stockanalysis.com/stocks/edit/history/",
+      news: [],
+      upcoming: [
+        { date: "2026-11-09", event: "Q3 earnings (expected; estimated date, not confirmed by the company)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/edit/" }
+      ]
+    },
+    VRTX: {
+      closes: [
+        { date: "2026-10-21", close: 524.52 },
+        { date: "2026-10-22", close: 535.17 },
+        { date: "2026-10-23", close: 523.93 },
+        { date: "2026-10-26", close: 517.49 },
+        { date: "2026-10-27", close: 521.03 }
+      ],
+      latest: { date: "2026-10-28", time: "10:34 AM", price: 530.02 },
+      priceSource: "https://stockanalysis.com/stocks/vrtx/history/",
       news: [
-        { date: "2026-10-13", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
+        { date: "2026-10-23", headline: "Phase 3 RAINIER Results Supporting Best-in-Class Potential of Povetacicept in IgA Nephropathy Published in the New England Journal of Medicine and Presented at the American Society of Nephrology Kidney Week 2026", source: "Vertex press release (Business Wire)", url: "https://via.tt.se/pressmeddelande/4614139/phase-3-rainier-results-supporting-best-in-class-potential-of-povetacicept-in-iga-nephropathy-published-in-the-new-england-journal-of-medicine-and-presented-at-the-american-society-of-nephrology-kidney-week-2026?lang=en", why: "Interim Phase 3 data for povetacicept met the primary endpoint ahead of a November 30 FDA decision date, so it bears directly on a possible new kidney drug launch." }
       ],
-      upcoming: []
+      upcoming: [
+        { date: "2026-11-02", event: "Q3 2026 results after market close, call 4:30 p.m. ET (confirmed by the company)", source: "Vertex press release (BioSpace)", url: "https://www.biospace.com/press-releases/vertex-to-announce-third-quarter-2026-financial-results-november-2nd" }
+      ]
     },
     LLY: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 98.70 },
-        { date: "2026-10-14", close: 99.60 },
-        { date: "2026-10-15", close: 101.30 },
-        { date: "2026-10-16", close: 102.90 }
+        { date: "2026-10-21", close: 1270.75 },
+        { date: "2026-10-22", close: 1306.69 },
+        { date: "2026-10-23", close: 1273.46 },
+        { date: "2026-10-26", close: 1279.14 },
+        { date: "2026-10-27", close: 1281.91 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:33 AM", price: 1290.09 },
+      priceSource: "https://stockanalysis.com/stocks/lly/history/",
       news: [
-        { date: "2026-10-16", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
+        { date: "2026-10-28", headline: "Lilly's retatrutide delivered greater A1C reduction and more than double the weight loss of Ozempic's highest approved dose in head-to-head trial", source: "Lilly press release (PR Newswire)", url: "https://www.prnewswire.com/news-releases/lillys-retatrutide-delivered-greater-a1c-reduction-and-more-than-double-the-weight-loss-of-ozempics-highest-approved-dose-in-head-to-head-trial-302921328.html", why: "A Phase 3 head-to-head win over Novo's Ozempic strengthens the case for Lilly's next obesity and diabetes drug." },
+        { date: "2026-10-27", headline: "Patrik Jonsson to retire after 36 years; Ilya Yuffa named president, Lilly Global Markets", source: "Lilly press release (PR Newswire)", url: "https://www.prnewswire.com/news-releases/patrik-jonsson-to-retire-after-36-years-ilya-yuffa-named-president-lilly-global-markets-302921191.html", why: "Lilly is merging its U.S. and international businesses under one leader from January 2027." },
+        { date: "2026-10-26", headline: "Lilly declares fourth-quarter 2026 dividend", source: "Lilly press release (PR Newswire)", url: "https://www.prnewswire.com/news-releases/lilly-declares-fourth-quarter-2026-dividend-302919496.html", why: "The board declared $1.73 per share, payable December 10 to holders of record on November 13." }
       ],
       upcoming: [
-        { date: "2026-10-30", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
+        { date: "2026-10-29", event: "Q3 2026 results, call 10 a.m. ET (confirmed by the company)", source: "Lilly press release (Finviz)", url: "https://finviz.com/news/403165/lilly-confirms-date-and-conference-call-for-third-quarter-2026-financial-results-announcement" }
+      ]
+    },
+    PFE: {
+      closes: [
+        { date: "2026-10-21", close: 29.85 },
+        { date: "2026-10-22", close: 30.42 },
+        { date: "2026-10-23", close: 30.03 },
+        { date: "2026-10-26", close: 29.79 },
+        { date: "2026-10-27", close: 29.80 }
+      ],
+      latest: { date: "2026-10-28", time: "10:35 AM", price: 29.64 },
+      priceSource: "https://stockanalysis.com/stocks/pfe/history/",
+      news: [
+        { date: "2026-10-27", headline: "Pfizer says Phase 3 MagnetisMM-32 study met primary endpoint", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/pfizer-says-phase-3-magnetismm-32-study-met-primary-endpoint-thefly-news", why: "ELREXFIO beat standard regimens on progression-free survival in relapsed multiple myeloma, which could widen its label." },
+        { date: "2026-10-26", headline: "Pfizer announces FDA expanded approval for TALZENNA plus XTANDI", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/pfizer-announces-fda-expanded-approval-for-talzenna-plus-xtandi-thefly-news", why: "The FDA cleared the combination for an earlier stage of metastatic prostate cancer, enlarging the eligible patient group." },
+        { date: "2026-10-25", headline: "Pfizer announces results across serotypes in Phase 2 study of 25vPnC", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/pfizer-announces-results-across-serotypes-in-phase-2-study-of-25vpnc-thefly-news", why: "The infant pneumococcal vaccine candidate is Pfizer's planned successor to the Prevnar franchise." }
+      ],
+      upcoming: [
+        { date: "2026-11-03", event: "Q3 2026 results that morning, analyst call 10 a.m. ET (confirmed by the company)", source: "Pfizer press release (Finviz)", url: "https://finviz.com/news/394367/pfizer-invites-public-to-view-and-listen-to-webcast-of-november-3-conference-call-with-analysts" },
+        { date: "2026-11-06", event: "Dividend record date, $0.43 per share, payable December 7", source: "Pfizer press release (BioSpace)", url: "https://www.biospace.com/press-releases/pfizer-declares-fourth-quarter-2026-dividend" }
+      ]
+    },
+    REGN: {
+      closes: [
+        { date: "2026-10-21", close: 805.67 },
+        { date: "2026-10-22", close: 819.09 },
+        { date: "2026-10-23", close: 805.02 },
+        { date: "2026-10-26", close: 807.67 },
+        { date: "2026-10-27", close: 816.10 }
+      ],
+      latest: { date: "2026-10-28", time: "10:35 AM", price: 818.13 },
+      priceSource: "https://stockanalysis.com/stocks/regn/history/",
+      news: [
+        { date: "2026-10-28", headline: "Regeneron announces longer-term data for Phase 3 C-POST trial of Libtayo", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/regeneron-announces-longer-term-data-for-phase-3-c-post-trial-of-libtayo-thefly-news", why: "Nearly four years of follow-up showed a continuing survival benefit for adjuvant Libtayo in high-risk skin cancer." },
+        { date: "2026-10-28", headline: "Regeneron price target raised to $922 from $875 at Canaccord", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/regeneron-price-target-raised-to-922-from-875-at-canaccord-thefly-news", why: "An analyst raised the target ahead of Q3 results, expecting continued Dupixent growth." },
+        { date: "2026-10-26", headline: "Regeneron extends Inmazeb agreement with BARDA for Ebola preparedness", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/regeneron-extends-inmazeb-agreement-with-barda-for-ebola-preparedness-thefly-news", why: "A roughly $270 million U.S. government supply deal through 2031 adds steady, if small, revenue." }
+      ],
+      upcoming: [
+        { date: "2026-10-30", event: "Q3 2026 results before market open, call 8:30 a.m. ET (confirmed by the company)", source: "Regeneron press release (Finviz)", url: "https://finviz.com/news/395385/regeneron-to-report-third-quarter-2026-financial-and-operating-results-and-host-conference-call-and-webcast-on-october-30-2026" }
+      ]
+    },
+    AMGN: {
+      closes: [
+        { date: "2026-10-21", close: 438.34 },
+        { date: "2026-10-22", close: 447.28 },
+        { date: "2026-10-23", close: 439.26 },
+        { date: "2026-10-26", close: 444.63 },
+        { date: "2026-10-27", close: 447.95 }
+      ],
+      latest: { date: "2026-10-28", time: "10:34 AM", price: 452.39 },
+      priceSource: "https://stockanalysis.com/stocks/amgn/history/",
+      news: [
+        { date: "2026-10-27", headline: "FDA says Amgen's video ads for Vectibix 'false or misleading'", source: "TheFly", url: "https://www.tipranks.com/news/the-fly/fda-says-amgens-video-ads-for-vectibix-false-or-misleading-thefly-news", why: "A regulatory warning on marketing; usually a small financial matter but worth watching." },
+        { date: "2026-10-26", headline: "Amgen appoints David W. Gibbs to Board of Directors", source: "Amgen press release (PR Newswire)", url: "https://www.prnewswire.com/news-releases/amgen-appoints-david-w-gibbs-to-board-of-directors-302919950.html", why: "The former Yum! Brands CEO joins the board's audit and compensation committees." },
+        { date: "2026-10-24", headline: "IMDELLTRA in combination with IMFINZI reduced risk of death by an unprecedented 58% in first-line extensive stage small cell lung cancer", source: "Amgen press release (PR Newswire)", url: "https://www.prnewswire.com/news-releases/imdelltra-in-combination-with-imfinzi-reduced-risk-of-death-by-an-unprecedented-58-in-first-line-extensive-stage-small-cell-lung-cancer-302918652.html", why: "Interim Phase 3 data could move Imdelltra into first-line maintenance use, a much larger market." }
+      ],
+      upcoming: [
+        { date: "2026-11-03", event: "Q3 earnings (expected; date listed by StockAnalysis, no company announcement found)", source: "StockAnalysis", url: "https://stockanalysis.com/stocks/amgn/" }
       ]
     }
-  }
+  },
+  market: [
+    { date: "2026-10-28", event: "FOMC rate decision", source: "Federal Reserve", url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+    { date: "2026-11-10", event: "October CPI release", source: "BLS", url: "https://www.bls.gov/schedule/news_release/cpi.htm" }
+  ]
 };
 
 const CHANGELOG = [
+  {
+    date: "2026-10-28",
+    summary: [
+      "First live refresh for the new ten-ticker list. Sample data for NVDA, JPM, ACN, DE removed; LLY replaced with real data.",
+      "Prices: closes Oct 21 to Oct 27 plus an intraday price at about 10:34 AM ET on Oct 28 (market open). Week moves are computed by the page.",
+      "BEAM 24.84 to 26.32 on initial BEAM-301 clinical data",
+      "PRME 3.81 to 4.90, no major news found in the last seven days",
+      "CRSP 50.50 to 52.00, no major news found in the last seven days",
+      "NTLA 11.65 to 12.69, no major news found in the last seven days",
+      "EDIT 2.51 to 2.66, no major news found in the last seven days",
+      "VRTX 524.52 to 530.02 on Phase 3 RAINIER povetacicept data in NEJM",
+      "LLY 1,270.75 to 1,290.09 on retatrutide beating Ozempic head to head",
+      "PFE 29.85 to 29.64 on ELREXFIO Phase 3 MagnetisMM-32 meeting its primary endpoint",
+      "REGN 805.67 to 818.13 on longer-term Libtayo C-POST survival data",
+      "AMGN 438.34 to 452.39 on Imdelltra plus Imfinzi cutting risk of death 58% in small cell lung cancer",
+      "Calendar added: LLY Q3 results Oct 29, REGN Oct 30, VRTX Nov 2, PFE Nov 3 (all confirmed); PFE dividend record date Nov 6.",
+      "Calendar added as expected only: AMGN Nov 3, CRSP/NTLA/EDIT Nov 9, BEAM/PRME Nov 10 (estimated dates from StockAnalysis).",
+      "Missing: no dated news within Oct 21 to 28 found for PRME, CRSP, NTLA, EDIT (empty lists). The CRSP CFO transition (Oct 19) falls just outside the window.",
+      "Market-wide calendar: FOMC decision Oct 28 (federalreserve.gov) and October CPI Nov 10 (bls.gov)."
+    ],
+    note: "All prices from StockAnalysis history pages; Oct 28 is intraday, not a close. Earnings dates for AMGN, BEAM, PRME, CRSP, NTLA, EDIT are estimates, not confirmed. Several company press releases were opened on mirrors (BioSpace, Finviz, via.tt.se) because the IR sites blocked access. PRME rose sharply Oct 27 and 28 with no news found to explain it."
+  },
   {
     date: "2026-10-16",
     summary: [
@@ -430,11 +554,12 @@ function renderCalendar() {
     if (!c) return;
     c.upcoming.forEach(e => rows.push({ sym: t.symbol, e: e }));
   });
+  (Array.isArray(BRIEF.market) ? BRIEF.market : []).forEach(e => { if (e) rows.push({ sym: "MKT", mkt: true, e: e }); });
   rows.sort((a, b) => String(a.e.date).localeCompare(String(b.e.date)));
-  if (!rows.length) { ul.innerHTML = '<li class="empty" style="display:block">No scheduled events were found across the watchlist.</li>'; return; }
+  if (!rows.length) { ul.innerHTML = '<li class="empty" style="display:block">No scheduled events were found across the watchlist or the market.</li>'; return; }
   ul.innerHTML = rows.map(r => {
     const u = safeUrl(r.e.url);
-    return '<li><span class="d">' + fmtDate(r.e.date, true) + '</span><span class="t">' + esc(r.sym) + '</span><span>' + esc(r.e.event) +
+    return '<li><span class="d">' + fmtDate(r.e.date, true) + '</span><span class="t' + (r.mkt ? ' mkt' : '') + '">' + esc(r.sym) + '</span><span>' + esc(r.e.event) +
       (r.e.source ? ' <span class="src">(' + (u ? '<a href="' + esc(u) + '">' + esc(r.e.source) + '</a>' : esc(r.e.source)) + ')</span>' : "") + '</span></li>';
   }).join("");
 }

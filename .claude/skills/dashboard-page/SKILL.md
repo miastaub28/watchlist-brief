@@ -23,7 +23,8 @@ serve it is removed.
    items, each with a source link and a one-line "why it matters") and "Coming up" (dated
    events inside the next two weeks with a source link). Empty lists render a short grey
    sentence, never a blank space.
-4. **Calendar**: every upcoming event across all tickers, merged and sorted by date.
+4. **Calendar**: every upcoming event across all tickers plus `BRIEF.market`, merged and
+   sorted by date.
 5. **What changed**: the `CHANGELOG`, newest first. Each entry shows its date and the
    one-line summaries from that refresh.
 6. **Footer**: "Unofficial. Not investment advice. Numbers were collected by an AI agent
@@ -56,7 +57,8 @@ const BRIEF = {
       news: [ { date: "2026-10-15", headline: "...", source: "Reuters", url: "https://...", why: "..." } ],
       upcoming: [ { date: "2026-10-28", event: "Q3 earnings after close", source: "Company IR", url: "https://..." } ]
     }
-  }
+  },
+  market: [ { date: "2026-10-28", event: "FOMC rate decision", source: "Federal Reserve", url: "https://..." } ]  // market-wide events, shown in the calendar as MKT
 };
 
 const CHANGELOG = [
